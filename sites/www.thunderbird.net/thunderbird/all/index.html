@@ -44,7 +44,7 @@
             <strong>{{ _('Locale') }}</strong>
           </label>
           <select id="download-language-select" name="lang" dir="ltr" class="form-select">
-            {% for code, label in translations|dictsort -%}
+            {% for code, label in translations|dictsort(by='value') -%}
             {# We're just verifying release builds! #}
             {% if has_localized_download(code, None) %}
             <option lang="{{ code }}" value="{{ code }}" {{
