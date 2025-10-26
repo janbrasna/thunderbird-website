@@ -16,16 +16,16 @@ jobs:
         include:
           - python: "3.5"
             node: 16
-            os: ubuntu-22.04
-          - python: "3.9"
+            os: windows-2022
+          - python: "3.11"
             node: 20
-            os: macos-15
+            os: macos-15-intel
           - python: "3.13"
             node: 22
             os: ubuntu-24.04
           - python: "3.14"
             node: 24
-            os: windows-2025
+            os: macos-26
     steps:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v4
