@@ -11,17 +11,23 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python-version: [3.13]
-        node-version: [20]
+        include:
+          - node: 20
+            python: "3.7"
+          - node: 22
+            python: "3.13"
+          - node: 24
+            python: "3.14"
     steps:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{ matrix.node }}
     - uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python }}
     - name: Install project dependencies
       run: |
         npm install -g less
