@@ -16,7 +16,7 @@ jobs:
         include:
           - python: "3.7"
             node: 20
-            os: macos-15
+            os: macos-15-intel
           - python: "3.13"
             node: 22
             os: ubuntu-24.04
