@@ -14,10 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python: "3.7"
-            node: 20
+          - python: "3.5"
+            node: 16
             os: ubuntu-22.04
-          - python: "3.11"
+          - python: "3.9"
             node: 20
             os: macos-15
           - python: "3.13"
