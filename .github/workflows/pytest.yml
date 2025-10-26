@@ -9,17 +9,20 @@ on:
 
 jobs:
   pytest:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - node: 20
-            python: "3.7"
-          - node: 22
-            python: "3.13"
-          - node: 24
-            python: "3.14"
+          - python: "3.7"
+            node: 20
+            os: macos-15
+          - python: "3.13"
+            node: 22
+            os: ubuntu-24.04
+          - python: "3.14"
+            node: 24
+            os: windows-2025
     steps:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v4
