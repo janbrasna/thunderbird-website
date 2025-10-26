@@ -14,21 +14,21 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python: "3.9"
+          - python: "3.11"
             node: 16
-            os: ubuntu-22.04
-          - python: "3.10"
+            os: macos-15-intel
+          - python: "3.12"
             node: 20
             os: windows-2025
-          - python: "3.11"
-            node: 20
-            os: macos-15-intel
           - python: "3.13"
             node: 22
             os: ubuntu-24.04
           - python: "3.14"
             node: 24
             os: macos-26
+          - python: "3.15-dev"
+            node: 25
+            os: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v4
