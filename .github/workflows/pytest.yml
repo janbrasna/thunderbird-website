@@ -1,0 +1,32 @@
+name: Pytest CI
+
+on:
+  pull_request:
+  push:
+    branches:
+    - master
+    - pytest
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11, 3.14]
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
+    - uses: actions/setup-python@v6
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install project dependencies
+      run: |
+        npm install -g less
+        pip install -r requirements-dev.txt
+        git clone https://github.com/thunderbird/thunderbird-notes.git libs/thunderbird_notes
+        git clone -b production https://github.com/mozilla-releng/product-details.git libs/product-details
+    - name: Run pytest
+      run: |
+        python -m pytest tests
