@@ -8,7 +8,7 @@ on:
     - pytest
 
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -44,19 +44,19 @@ jobs:
         pip install -r requirements-dev.txt
         git clone https://github.com/thunderbird/thunderbird-notes.git libs/thunderbird_notes
         git clone -b production https://github.com/mozilla-releng/product-details.git libs/product-details
-    - name: Build site
+    - name: Build site (currently only on darwin)
       if: runner.os == 'macOS'
       run: |
         python build-site.py --debug --enus
-    - name: Build startpage
+    - name: Build startpage (currently only on darwin)
       if: runner.os == 'macOS'
       run: |
         python build-site.py --debug --enus --startpage
-    - name: Build tbpro
+    - name: Build tbpro (currently only on darwin)
       if: runner.os == 'macOS'
       run: |
         python build-site.py --debug --enus --tbpro
-  # - name: Build calendars
+  # - name: Build calendars (disabled until new provider)
   #   run: |
   #     python build-site.py --debug --enus --buildcalendar
     - name: Run pytest
