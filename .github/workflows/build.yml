@@ -1,4 +1,4 @@
-name: Pytest CI
+name: CI
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
     - pytest
 
 jobs:
-  pytest:
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -43,6 +43,18 @@ jobs:
         pip install -r requirements-dev.txt
         git clone https://github.com/thunderbird/thunderbird-notes.git libs/thunderbird_notes
         git clone -b production https://github.com/mozilla-releng/product-details.git libs/product-details
+    - name: Build site
+      run: |
+        python build-site.py --enus --debug
+    - name: Build startpage
+      run: |
+        python build-site.py --startpage --enus --debug
+    - name: Build tbpro
+      run: |
+        python build-site.py --tbpro --enus --debug
+    - name: Build calendars
+      run: |
+        python build-site.py --buildcalendar --enus --debug
     - name: Run pytest
       run: |
         python -m pytest tests
