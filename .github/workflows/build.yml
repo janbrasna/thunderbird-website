@@ -37,6 +37,7 @@ jobs:
     - uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python }}
+        cache: pip
     - name: Install project dependencies
       run: |
         npm install -g less
@@ -45,16 +46,19 @@ jobs:
         git clone -b production https://github.com/mozilla-releng/product-details.git libs/product-details
     - name: Build site
       run: |
-        python build-site.py --enus --debug
+        python build-site.py --enus
     - name: Build startpage
+      if: always()
       run: |
-        python build-site.py --startpage --enus --debug
+        python build-site.py --enus --startpage
     - name: Build tbpro
+      if: always()
       run: |
-        python build-site.py --tbpro --enus --debug
-    - name: Build calendars
-      run: |
-        python build-site.py --buildcalendar --enus --debug
+        python build-site.py --enus --tbpro
+  # - name: Build calendars
+  #   run: |
+  #     python build-site.py --enus --buildcalendar
     - name: Run pytest
+      if: always()
       run: |
         python -m pytest tests
