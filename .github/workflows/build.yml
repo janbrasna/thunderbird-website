@@ -45,20 +45,20 @@ jobs:
         git clone https://github.com/thunderbird/thunderbird-notes.git libs/thunderbird_notes
         git clone -b production https://github.com/mozilla-releng/product-details.git libs/product-details
     - name: Build site
+      if: runner.os == 'macOS'
       run: |
-        python build-site.py --enus
+        python build-site.py --debug --enus
     - name: Build startpage
-      if: always()
+      if: runner.os == 'macOS'
       run: |
-        python build-site.py --enus --startpage
+        python build-site.py --debug --enus --startpage
     - name: Build tbpro
-      if: always()
+      if: runner.os == 'macOS'
       run: |
-        python build-site.py --enus --tbpro
+        python build-site.py --debug --enus --tbpro
   # - name: Build calendars
   #   run: |
-  #     python build-site.py --enus --buildcalendar
+  #     python build-site.py --debug --enus --buildcalendar
     - name: Run pytest
-      if: always()
       run: |
         python -m pytest tests
