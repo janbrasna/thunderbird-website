@@ -51,6 +51,7 @@ jobs:
     - name: Compile locales (darwin compatible)
       if: runner.os != 'Windows'
       run: |
+        brew install gettext
         find libs/locale -name '*.po' -exec sh -c 'for f; do d=$(dirname "$f"); msgfmt "$f" -o "$d/messages.mo"; done' _ {} +
     - name: Build site (currently only on darwin)
       if: runner.os == 'macOS'
