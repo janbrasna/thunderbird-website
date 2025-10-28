@@ -51,7 +51,7 @@ jobs:
     - name: Install msgfmt
       if: runner.os == 'Linux'
       run: |
-        run: sudo apt-get update && sudo apt-get install -y gettext
+        sudo apt-get update && sudo apt-get install -y gettext
     - name: Compile locales (darwin compatible)
       if: runner.os != 'Windows'
       run: |
