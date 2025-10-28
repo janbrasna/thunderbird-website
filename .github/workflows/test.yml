@@ -43,6 +43,8 @@ jobs:
         cache: pip
     - name: Install project dependencies
       run: |
+        python -m venv .venv
+        source .venv/bin/activate
         npm install -g less
         pip install -r requirements-dev.txt
         git clone --depth 1 -b production https://github.com/mozilla-releng/product-details.git libs/product-details
@@ -56,8 +58,7 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         python build-site.py --debug --enus --startpage
-    - name: Build tbpro (currently only on darwin)
-      if: runner.os == 'macOS'
+    - name: Build tbpro (XXcurrently only on XXdarwin)
       run: |
         python build-site.py --debug --enus --tbpro
   # - name: Build calendars (disabled until new provider)
